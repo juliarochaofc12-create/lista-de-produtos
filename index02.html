@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista com Conclusão</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    transition: 0.3s;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+  }
+
+  .app {
+    width: 360px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toggle {
+    border: none;
+    background: #eee;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .input-area {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  button.add {
+    background: #2575fc;
+    border: none;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  li {
+    background: #f5f7ff;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .delete {
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .done {
+    background: #28a745;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* ✔ CONCLUÍDO */
+  .completed span {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .completed {
+    background: #dfffe3;
+  }
+
+  body.dark .completed {
+    background: #1f3a25;
+  }
+
+  /* DARK MODE */
+  body.dark {
+    background: #111;
+  }
+
+  body.dark .app {
+    background: #1e1e1e;
+    color: #fff;
+  }
+
+  body.dark input {
+    background: #2a2a2a;
+    color: #fff;
+    border-color: #444;
+  }
+
+  body.dark li {
+    background: #2a2a2a;
+  }
+
+  body.dark .toggle {
+    background: #333;
+    color: #fff;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="top">
+    <h1>📝 Lista</h1>
+    <button class="toggle" onclick="toggleDark()">🌙</button>
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="input" placeholder="Digite algo...">
+    <button class="add" onclick="addItem()">+</button>
+  </div>
+
+  <ul id="list"></ul>
+</div>
+
+<script>
+  function addItem() {
+    const input = document.getElementById("input");
+    const value = input.value.trim();
+
+    if (!value) return;
+
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <span>${value}</span>
+      <div class="actions">
+        <button class="done" onclick="toggleDone(this)">✔</button>
+        <button class="delete" onclick="this.parentElement.parentElement.remove()">X</button>
+      </div>
+    `;
+
+    document.getElementById("list").appendChild(li);
+    input.value = "";
+  }
+
+  function toggleDone(button) {
+    const li = button.parentElement.parentElement;
+    li.classList.toggle("completed");
+  }
+
+  function toggleDark() {
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+      "theme",
+      document.body.classList.contains("dark") ? "dark" : "light"
+    );
+  }
+
+  window.onload = function () {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+  };
+
+  document.getElementById("input").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") addItem();
+  });
+</script>
+
+</body>
+</html>

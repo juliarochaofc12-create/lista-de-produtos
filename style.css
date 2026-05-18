@@ -1,0 +1,119 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial;
+  background:#f4f6f9;
+  padding:20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+/* HEADER */
+header{
+  margin-bottom:20px;
+}
+
+/* DASHBOARD */
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.08);
+}
+
+/* CATEGORIAS */
+.categorias{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.categorias button{
+  padding:10px 14px;
+  border:none;
+  border-radius:20px;
+  background:#e5e7eb;
+  cursor:pointer;
+}
+
+.categorias button:hover{
+  background:#2563eb;
+  color:white;
+}
+
+/* FORM */
+.formulario{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.formulario input{
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+
+button{
+  padding:12px;
+  border:none;
+  background:#2563eb;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* PESQUISA */
+.pesquisa{
+  margin-bottom:15px;
+}
+
+.pesquisa input{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* TABELA */
+.tabela{
+  background:white;
+  border-radius:10px;
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+thead{
+  background:#2563eb;
+  color:white;
+}
+
+th,td{
+  padding:12px;
+  text-align:center;
+  border-bottom:1px solid #eee;
+}
+
+.baixo{
+  background:#ffe5e5;
+}
