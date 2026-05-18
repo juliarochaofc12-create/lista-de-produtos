@@ -110,7 +110,12 @@
     cursor: pointer;
   }
 
-  /* ✔ CONCLUÍDO */
+  /* =======================
+     ✔ CHECKBOX / CONCLUÍDO
+     =======================
+     O check serve para marcar
+     a tarefa como concluída.
+  */
   .completed span {
     text-decoration: line-through;
     opacity: 0.6;
@@ -124,7 +129,12 @@
     background: #1f3a25;
   }
 
-  /* DARK MODE */
+  /* =======================
+     🌙 MODO ESCURO
+     =======================
+     Aqui fica a estilização
+     do tema escuro.
+  */
   body.dark {
     background: #111;
   }
@@ -157,11 +167,31 @@
 
   <div class="top">
     <h1>📝 Lista</h1>
+
+    <!-- =======================
+         🌙 BOTÃO MODO ESCURO
+         =======================
+         Botão responsável por
+         ativar/desativar o tema escuro.
+    -->
     <button class="toggle" onclick="toggleDark()">🌙</button>
   </div>
 
   <div class="input-area">
+
+    <!-- =======================
+         ⌨ INPUT
+         =======================
+         Campo onde o usuário
+         digita a tarefa.
+    -->
     <input type="text" id="input" placeholder="Digite algo...">
+
+    <!-- =======================
+         ➕ BOTÃO ADICIONAR
+         =======================
+         Adiciona uma nova tarefa.
+    -->
     <button class="add" onclick="addItem()">+</button>
   </div>
 
@@ -169,7 +199,12 @@
 </div>
 
 <script>
+
+  // =======================
+  // ➕ ADICIONAR ITEM
+  // =======================
   function addItem() {
+
     const input = document.getElementById("input");
     const value = input.value.trim();
 
@@ -179,39 +214,101 @@
 
     li.innerHTML = `
       <span>${value}</span>
+
       <div class="actions">
+
+        <!-- =======================
+             ✔ CHECKBOX
+             =======================
+             Marca a tarefa como concluída.
+        -->
         <button class="done" onclick="toggleDone(this)">✔</button>
+
+        <!-- =======================
+             ❌ BOTÃO EXCLUIR
+             =======================
+             Remove a tarefa da lista.
+        -->
         <button class="delete" onclick="this.parentElement.parentElement.remove()">X</button>
+
       </div>
     `;
 
     document.getElementById("list").appendChild(li);
+
     input.value = "";
   }
 
+  // =======================
+  // ✔ CHECKBOX
+  // =======================
+  // O checkbox pode ser usado para:
+  // ✔ Mostrar apenas produtos com estoque baixo
+  // ✔ Ativar modo escuro
+  // ✔ Filtrar categorias
+  // Exemplo de uso:
+  // if (checkbox.checked) {
+  //   // ação
+  // }
+
   function toggleDone(button) {
+
     const li = button.parentElement.parentElement;
+
     li.classList.toggle("completed");
   }
 
+  // =======================
+  // 🌙 MODO ESCURO
+  // =======================
+  // Aqui você pode criar um botão
+  // para ativar/desativar o tema escuro.
+  // Exemplo:
+  // document.body.classList.toggle("dark");
+
   function toggleDark() {
+
     document.body.classList.toggle("dark");
 
     localStorage.setItem(
       "theme",
-      document.body.classList.contains("dark") ? "dark" : "light"
+      document.body.classList.contains("dark")
+      ? "dark"
+      : "light"
     );
   }
 
+  // =======================
+  // 💾 SALVAR TEMA
+  // =======================
   window.onload = function () {
+
     if (localStorage.getItem("theme") === "dark") {
+
       document.body.classList.add("dark");
+
     }
   };
 
-  document.getElementById("input").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") addItem();
-  });
+  // =======================
+  // ⌨ BOTÃO ENTER
+  // =======================
+  // Quando o usuário apertar ENTER,
+  // o sistema adiciona automaticamente
+  // uma nova tarefa.
+
+  document
+    .getElementById("input")
+    .addEventListener("keypress", function(e) {
+
+      if (e.key === "Enter") {
+
+        addItem();
+
+      }
+
+    });
+
 </script>
 
 </body>
