@@ -1,0 +1,48 @@
+const express = require("express");
+
+const app = express();
+const PORT = 3000;
+
+// Rota principal
+app.get("/", (req, res) => {
+    res.json({
+        mensagem: "API funcionando com sucesso!"
+    });
+});
+
+// Rota produtos
+app.get("/produtos", (req, res) => {
+    res.json([
+        { id: 1, nome: "Notebook", preco: 3500 },
+        { id: 2, nome: "Mouse Gamer", preco: 150 }
+    ]);
+});
+
+// Rota usuários
+app.get("/usuarios", (req, res) => {
+    res.json([
+        { id: 1, nome: "Julia", idade: 17 },
+        { id: 2, nome: "Carlos", idade: 22 }
+    ]);
+});
+
+// Rota pedidos
+app.get("/pedidos", (req, res) => {
+    res.json([
+        { id: 1, produto: "Notebook", quantidade: 1 },
+        { id: 2, produto: "Mouse Gamer", quantidade: 2 }
+    ]);
+});
+
+// Rota categorias
+app.get("/categorias", (req, res) => {
+    res.json([
+        { id: 1, nome: "Informática" },
+        { id: 2, nome: "Acessórios" }
+    ]);
+});
+
+// Inicializando servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
